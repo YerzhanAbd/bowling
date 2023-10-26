@@ -50,6 +50,11 @@ TEST_CASE("Test with bonus points") {
     CHECK(game->score() == 70);
     game->roll(10);
     CHECK(game->score() == 100);
-
+    game->roll(10);
+    CHECK(game->score() == 130);
+    game->roll(10);
+    CHECK(game->score() == 160);
+    game->roll(10);
+    CHECK(game->score() == 190);
 }
 
