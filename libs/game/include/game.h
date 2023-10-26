@@ -11,5 +11,6 @@ private:
 public:
     Game();
     void roll(int pins);
+    void calculateBonus(int pins);
     int score();
 };
