@@ -60,3 +60,35 @@ TEST_CASE("Test with bonus points") {
     CHECK(game->score() == 190);
 }
 
+TEST_CASE("Perfect game") {
+    Game* game = new Game();
+    game->roll(10);
+    game->roll(10);
+    game->roll(10);
+    game->roll(10);
+    game->roll(10);
+    game->roll(10);
+    game->roll(10);
+    game->roll(10);
+    game->roll(10);
+    game->roll(10);
+    game->roll(10);
+    game->roll(10);
+    CHECK(game->score() == 300);
+}
+
+TEST_CASE("Game with no points") {
+    Game* game = new Game();
+    game->roll(0);
+    game->roll(0);
+    game->roll(0);
+    game->roll(0);
+    game->roll(0);
+    game->roll(0);
+    game->roll(0);
+    game->roll(0);
+    game->roll(0);
+    game->roll(0);
+    CHECK(game->score() == 0);
+}
+
