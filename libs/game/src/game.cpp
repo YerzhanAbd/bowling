@@ -18,6 +18,12 @@ void Game::roll(int pins) {
     rollNum++;
 }
 
+void Game::rollMany(int rolls, int pins) {
+    for (int i = 0; i < rolls; i++) {
+        roll(pins);
+    }
+}
+
 void Game::print() {
     for (auto bowl: bowls) {
         std::cout << bowl << ' ';

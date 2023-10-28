@@ -9,6 +9,7 @@ private:
 public:
     Game();
     void roll(int pins);
+    void rollMany(int rolls, int pins);
     int score();
     bool strike(int index);
     bool split(int index);

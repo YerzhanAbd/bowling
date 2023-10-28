@@ -41,9 +41,7 @@ TEST_CASE("Test with bonus points") {
     game->roll(3);
     CHECK(game->score() == 68);
 
-    game->roll(1);
-    CHECK(game->score() == 69);
-    game->roll(1);
+    game->rollMany(2, 1);
     CHECK(game->score() == 70);
 
     game->roll(10);
@@ -62,33 +60,13 @@ TEST_CASE("Test with bonus points") {
 
 TEST_CASE("Perfect game") {
     Game* game = new Game();
-    game->roll(10);
-    game->roll(10);
-    game->roll(10);
-    game->roll(10);
-    game->roll(10);
-    game->roll(10);
-    game->roll(10);
-    game->roll(10);
-    game->roll(10);
-    game->roll(10);
-    game->roll(10);
-    game->roll(10);
+    game->rollMany(10, 12);
     CHECK(game->score() == 300);
 }
 
 TEST_CASE("Game with no points") {
     Game* game = new Game();
-    game->roll(0);
-    game->roll(0);
-    game->roll(0);
-    game->roll(0);
-    game->roll(0);
-    game->roll(0);
-    game->roll(0);
-    game->roll(0);
-    game->roll(0);
-    game->roll(0);
+    game->rollMany(10, 0);
     CHECK(game->score() == 0);
 }
 
