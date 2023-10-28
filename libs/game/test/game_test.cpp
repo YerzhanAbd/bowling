@@ -60,7 +60,7 @@ TEST_CASE("Test with bonus points") {
 
 TEST_CASE("Perfect game") {
     Game* game = new Game();
-    game->rollMany(10, 12);
+    game->rollMany(12, 10);
     CHECK(game->score() == 300);
 }
 
