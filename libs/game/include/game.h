@@ -4,13 +4,13 @@
 class Game
 {
 private:
-    int x;
-    std::vector<int> duo;
-    std::vector<int> frames;
-    std::vector<int> bonus;
+    std::vector<int> bowls;
+    int rollNum;
 public:
     Game();
     void roll(int pins);
-    void calculateBonus(int pins);
     int score();
+    bool strike(int index);
+    bool split(int index);
+    void print();
 };

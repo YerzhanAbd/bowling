@@ -6,14 +6,16 @@ using namespace std;
 TEST_CASE("Test basics") {
     Game* game = new Game();
 
-    game->roll(2);
     CHECK(game->score() == 0);
+
+    game->roll(2);
+    CHECK(game->score() == 2);
 
     game->roll(6);
     CHECK(game->score() == 8);
 
     game->roll(2);
-    CHECK(game->score() == 8); 
+    CHECK(game->score() == 10); 
 
     game->roll(4);
     CHECK(game->score() == 14); 
@@ -23,37 +25,37 @@ TEST_CASE("Test with bonus points") {
     Game *game = new Game();
 
     game->roll(2);
-    CHECK(game->score() == 0);
+    CHECK(game->score() == 2);
     game->roll(6);
     CHECK(game->score() == 8);
     game->roll(2);
-    CHECK(game->score() == 8);
+    CHECK(game->score() == 10);
     game->roll(4);
     CHECK(game->score() == 14);
     game->roll(10);
-    CHECK(game->score() == 14);
+    CHECK(game->score() == 24);
     game->roll(10);
-    CHECK(game->score() == 14);
+    CHECK(game->score() == 44);
     game->roll(6);
-    CHECK(game->score() == 40);
+    CHECK(game->score() == 62);
     game->roll(3);
     CHECK(game->score() == 68);
 
     game->roll(1);
-    CHECK(game->score() == 68);
+    CHECK(game->score() == 69);
     game->roll(1);
     CHECK(game->score() == 70);
 
     game->roll(10);
-    CHECK(game->score() == 70);
-    game->roll(10);
-    CHECK(game->score() == 70);
+    CHECK(game->score() == 80);
     game->roll(10);
     CHECK(game->score() == 100);
     game->roll(10);
     CHECK(game->score() == 130);
     game->roll(10);
     CHECK(game->score() == 160);
+    game->roll(10);
+    CHECK(game->score() == 180);
     game->roll(10);
     CHECK(game->score() == 190);
 }

@@ -2,75 +2,49 @@
 #include <iostream>
 #include <numeric>
 
-Game::Game() : x(0) {
+Game::Game() : rollNum(0), bowls(21, 0) {
 }
 
-void Game::calculateBonus(int pins) {
-    for (int i = 0; i < bonus.size(); i++) {
-        if (bonus[i] != 0) {
-            bonus[i]--;
-            frames[i] += pins;
-        }
-    }
+bool Game::strike(int index) {
+    return bowls[index] == 10;
+}
+
+bool Game::split(int index) {
+    return bowls[index] + bowls[index+1] == 10;
 }
 
 void Game::roll(int pins) {
-    calculateBonus(pins);
-    if (frames.size() == 10) {
-        return;
-    }
+    bowls[rollNum] = pins;
+    rollNum++;
+}
 
-    
-    if (frames.size() == 9) {
-        int sum = std::accumulate(duo.begin(), duo.end(), 0); 
-        if (duo.size() <= 2) {
-            if (!duo.empty() && std::accumulate(duo.begin(), duo.end(), 0) < 10) {
-               frames.push_back(sum);
-               bonus = {};
-               bonus.resize(10); 
-            }
-            else {
-                duo.push_back(pins);
-            }
-            return;
-        }
-        else {
-            frames.push_back(sum);
-            bonus = {};
-            bonus.resize(10);  
-            return;
-        }
+void Game::print() {
+    for (auto bowl: bowls) {
+        std::cout << bowl << ' ';
     }
-    if (duo.empty()) {
-        if (pins == 10) {
-            frames.push_back(10);
-            bonus.push_back(2);
-        }
-        else {
-            duo.push_back(pins);
-        }
-    }
-    else {
-        frames.push_back(pins + duo.back());
-        duo = {};
-        if (frames.back() == 10) {
-            bonus.push_back(1);
-        }
-        else {
-            bonus.push_back(0);
-        }
-    }
+    std::cout << std::endl;
 }
 
 int Game::score() {
     int sum = 0;
-    for (int i = 0; i < bonus.size(); i++) {
-        if (bonus[i] == 0) {
-            sum += frames[i];
+    if (bowls.size() == 0) {
+        return 0;
+    }
+
+    int index = 0;
+    for (int i = 0; i < 10; i++) {
+        if (strike(index)) {
+            sum += 10 + bowls[index+1] + bowls[index+2];
+            index += 1;
+        }                 
+        else if (split(index)) {
+            sum += bowls[index] + bowls[index+1] + bowls[index+2]; 
+            index += 2;
         }
         else {
-            return sum;
+            sum += bowls[index] + bowls[index+1];
+            index += 2;
         }
     }
-    return sum;
+    return sum; 
 }
